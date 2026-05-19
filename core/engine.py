@@ -8,7 +8,6 @@ class CalculatorEngine:
         if not expression or expression == "Error":
             return 0.0
 
-
         # Security check: Whitelist safe characters
         allowed_chars = "0123456789+-*/.() %"
         if not all(char in allowed_chars for char in expression):
