@@ -1,4 +1,4 @@
-# app.py
+# main.py
 import flet as ft
 import re
 from core.engine import CalculatorEngine
