@@ -151,7 +151,8 @@ def main(page: ft.Page):
     # ==========================================
     # CORE SYSTEM ROUTING ENGINE
     # ==========================================
-    def route_change(e: ft.RouteChangeEvent):
+    # FIX 1: Made 'e' optional (e=None) so we can manually call it on boot
+    def route_change(e=None):
         page.views.clear()
 
         # VIEW A: THE PORTFOLIO HUB (Default Home)
@@ -173,14 +174,13 @@ def main(page: ft.Page):
                                     ft.Card(
                                         content=ft.Container(
                                             content=ft.ListTile(
-                                                leading=ft.Icon(ft.Icons.CALCULATOR, color=ft.Colors.GREEN_400,
-                                                                size=32),
+                                                # FIX: Changed ft.Icons.CALCULATOR to ft.Icons.CALCULATE
+                                                leading=ft.Icon(ft.Icons.CALCULATE, color=ft.Colors.GREEN_400, size=32),
                                                 title=ft.Text("OmniConvert Engine", weight=ft.FontWeight.BOLD),
                                                 subtitle=ft.Text(
                                                     "Advanced arithmetic calculator with persistent operations and memory cache systems."),
                                             ),
                                             padding=10,
-                                            # FIX 1: Swapped to page.navigate()
                                             on_click=lambda _: page.navigate("/calculator")
                                         )
                                     ),
@@ -248,15 +248,14 @@ def main(page: ft.Page):
     def view_pop(e: ft.ViewPopEvent):
         page.views.pop()
         top_view = page.views[-1]
-        # FIX 2: Swapped to page.navigate()
         page.navigate(top_view.route)
 
     # Bind Routing handlers to page actions
     page.on_route_change = route_change
     page.on_view_pop = view_pop
 
-    # FIX 3: Swapped to page.navigate()
-    page.navigate(page.route)
+    # FIX 2: Manually force the initial view generation pass right on boot
+    route_change()
 
 
 if __name__ == "__main__":
