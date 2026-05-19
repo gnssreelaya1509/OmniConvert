@@ -42,8 +42,8 @@ def main(page: ft.Page):
     def build_btn(text, color=ft.Colors.GREY_800, text_color=ft.Colors.WHITE):
         return ft.Container(
             content=ft.Text(value=text, size=24, color=text_color, weight=ft.FontWeight.W_600),
-            # FIX: Capitalized CENTER to comply with Flet 0.80+ standards
-            alignment=ft.alignment.CENTER,
+            # FIX: Capitalized the 'A' in Alignment
+            alignment=ft.Alignment.CENTER,
             bgcolor=color,
             border_radius=50,
             on_click=button_click,
